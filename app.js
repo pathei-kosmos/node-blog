@@ -1,34 +1,48 @@
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
+const mongoose = require('mongoose');
+const dbURI = require('./dbURI');
+const Article = require('./models/article')
 const app = express();
+
+// connect to mongodb then listen for requests
+mongoose.connect(dbURI)
+    .then(() => {
+        app.listen(3000, () => {
+            console.log('connected to db')
+            console.log('server listening on port 3000...');
+        });
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
+// --- MIDDLEWARES ---
+// define static folder
+app.use(express.static('public'));
+// secure http headers
+app.use(helmet());
+// logger
+app.use(morgan('dev'));
 
 // register view engine
 app.set('view engine', 'ejs');
 
-// listen for requests
-app.listen(3000, () => {
-    console.log('server listening on port 3000...');
-});
-
-// define static folder
-app.use(express.static('public'));
-
-// secure http headers
-app.use(helmet());
-
-// logger
-app.use(morgan('dev'));
-
 // routing
 app.get('/', (req, res) => {
-    const articles = [
-        {title: "Yoshi find eggs", snippet: 'Lorem ipsum dolor sit amet consectetur'},
-        {title: "Mario find stars", snippet: 'Lorem ipsum dolor sit amet consectetur'},
-        {title: "How to defeat Bowser", snippet: 'Lorem ipsum dolor sit amet consectetur'},
-    ];
-    
-    res.render('index', { title: 'Home', articles });
+    res.redirect('/articles');
+});
+
+app.get('/articles', (req, res) => {
+    Article.find()
+        .sort({ createdAt: -1 })
+        .then(result => {
+            res.render('index', { title: 'Home', articles: result });
+        })
+        .catch(err => {
+            console.log(err);
+        });
 });
 
 app.get('/about', (req, res) => {
