@@ -10,7 +10,7 @@ const app = express();
 mongoose.connect(dbURI)
     .then(() => {
         app.listen(3000, () => {
-            console.log('connected to db')
+            console.log('connected to db');
             console.log('server listening on port 3000...');
         });
     })
@@ -56,4 +56,4 @@ app.get('/articles/create', (req, res) => {
 // 404 page
 app.use((req, res) => {
     res.status(404).render('404', { title: '404' });
-})
+});
