@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const dbURI = require('./dbURI');
-const Article = require('./models/Article')
+const Article = require('./models/article')
 const app = express();
 
 // connect to mongodb then listen for requests
