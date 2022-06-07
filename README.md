@@ -1,2 +1,2 @@
 # node-blog
-A blog creation exercise on the MERN stack (MongoDB + Express + React + Node).
+A blog creation exercise with Node (Express), MongoDB and EJS.
