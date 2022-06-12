@@ -15,12 +15,12 @@ Blog created with [Node.js](https://nodejs.org/en/) ([Express](https://expressjs
 Clone the repo and install the dependencies.
 
 ```bash
-git clone https://github.com/contentful/the-example-app.nodejs.git
-cd the-example-app.nodejs
+git clone https://github.com/pathei-kosmos/node-blog.git
+cd node-blog
 ```
 
 ```bash
 npm install
 ```
 
-*<sub>Note that for obvious security reasons the database connection file is not provided. You will have to replace it under the name `"dbURI.js"` at the root of the project.</sub>*
+Note that for obvious security reasons the database connection file is not provided. You will have to replace it under the name `"dbURI.js"` at the root of the project.
