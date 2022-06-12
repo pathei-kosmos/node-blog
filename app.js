@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const dbURI = require('./dbURI');
-const articlesRoutes = require('./routes/articlesRoutes');
+const articleRoutes = require('./routes/articleRoutes');
 const app = express();
 
 // connect to mongodb then listen for requests
@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
 });
 
 // articles routes
-app.use(articlesRoutes);
+app.use(articleRoutes);
 
 // about page
 app.get('/about', (req, res) => {
