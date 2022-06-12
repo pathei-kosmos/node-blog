@@ -33,7 +33,6 @@ app.disable('x-powered-by');
 // logger
 app.use(morgan('dev'));
 
-
 // register view engine
 app.set('view engine', 'ejs');
 
