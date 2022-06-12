@@ -21,6 +21,8 @@ mongoose.connect(dbURI)
 // --- MIDDLEWARES ---
 // define static folder
 app.use(express.static('public'));
+// POST requests body parser
+app.use(express.urlencoded({ extended: true }));
 // secure http headers
 app.use(helmet());
 // logger
@@ -29,11 +31,12 @@ app.use(morgan('dev'));
 // register view engine
 app.set('view engine', 'ejs');
 
-// routing
+//  --- ROUTING ---
 app.get('/', (req, res) => {
     res.redirect('/articles');
 });
 
+// display all articles
 app.get('/articles', (req, res) => {
     Article.find()
         .sort({ createdAt: -1 })
@@ -45,12 +48,50 @@ app.get('/articles', (req, res) => {
         });
 });
 
-app.get('/about', (req, res) => {
-    res.render('about', { title: 'About' });
-});
-
+// article creation form
 app.get('/articles/create', (req, res) => {
     res.render('createArticle.ejs', { title: 'New article' });
+});
+
+// article creation route
+app.post('/articles', (req, res) => {
+    const article = new Article(req.body);
+    article.save()
+        .then(() => {
+            res.redirect('/articles');
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
+// display one article
+app.get('/articles/:id', (req, res) => {
+    const id = req.params.id;
+    Article.findById(id)
+        .then(result => {
+            res.render('details', { title: 'Article Details', article: result });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
+// delete one article
+app.delete('/articles/:id', (req, res) => {
+    const id = req.params.id;
+    Article.findByIdAndDelete(id)
+        .then(() => {
+            res.json({ redirect: '/articles' });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
+// about page
+app.get('/about', (req, res) => {
+    res.render('about', { title: 'About' });
 });
 
 // 404 page
