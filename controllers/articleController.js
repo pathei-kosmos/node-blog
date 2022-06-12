@@ -55,4 +55,4 @@ module.exports = {
     article_create_get,
     article_create_post,
     article_delete
-}
+};
