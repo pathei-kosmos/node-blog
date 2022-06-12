@@ -28,6 +28,8 @@ app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 // secure HTTP headers
 app.use(helmet());
+// reduce fingerprinting
+app.disable('x-powered-by');
 // logger
 app.use(morgan('dev'));
 
