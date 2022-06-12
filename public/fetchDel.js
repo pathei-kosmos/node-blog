@@ -6,8 +6,9 @@ const fetchDel = async (endpoint) => {
 
 const trashcan = document.querySelector('.delete');
 
-trashcan.addEventListener('click', (e) => {
+trashcan.addEventListener('click', () => {
     const endpoint = `/articles/${trashcan.dataset.doc}`;
+    
     fetchDel(endpoint)
         .then(result => window.location.href = result.redirect)
         .catch(err => {
