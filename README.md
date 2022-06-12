@@ -6,9 +6,9 @@ Blog created with [Node.js](https://nodejs.org/en/) ([Express](https://expressjs
 
 ## Requirements
 
-* Node 8
+* Node 
 * Git
-* Contentful CLI (only for write access)
+* CLI
 
 ## Setup
 
@@ -23,4 +23,4 @@ cd the-example-app.nodejs
 npm install
 ```
 
-Note that for obvious security reasons the database connection file is not provided. You will have to replace it under the name "dbURI.js" at the root of the project.
+*<sub>Note that for obvious security reasons the database connection file is not provided. You will have to replace it under the name `"dbURI.js"` at the root of the project.</sub>*
